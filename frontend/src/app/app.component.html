@@ -1,0 +1,11 @@
+<app-product-list></app-product-list>
+<app-movimiento-form [productos]="productos" (registrar)="registrarMovimiento($event)"></app-movimiento-form>
+
+<div class="container row">
+  <label>Ver historial del producto:</label>
+  <select [(ngModel)]="productoHistorialId">
+    <option *ngFor="let p of productos" [ngValue]="p.id">{{ p.nombre }}</option>
+  </select>
+</div>
+
+<app-movimiento-history [productoId]="productoHistorialId"></app-movimiento-history>
