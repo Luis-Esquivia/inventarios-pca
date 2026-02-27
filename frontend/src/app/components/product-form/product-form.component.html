@@ -1,0 +1,29 @@
+<h3>{{ form.value.id ? 'Editar producto' : 'Nuevo producto' }}</h3>
+<form [formGroup]="form" (ngSubmit)="enviar()" class="form-grid">
+  <div>
+    <label>Código</label>
+    <input formControlName="codigo" />
+  </div>
+  <div>
+    <label>Nombre</label>
+    <input formControlName="nombre" />
+  </div>
+  <div>
+    <label>Precio</label>
+    <input type="number" formControlName="precio" />
+  </div>
+  <div>
+    <label>Stock actual</label>
+    <input type="number" formControlName="stockActual" />
+  </div>
+  <div>
+    <label>Categoría</label>
+    <select formControlName="categoriaId">
+      <option [ngValue]="null">Seleccione</option>
+      <option *ngFor="let c of categorias" [ngValue]="c.id">{{ c.nombre }}</option>
+    </select>
+  </div>
+  <div style="align-self:end;">
+    <button type="submit">Guardar</button>
+  </div>
+</form>

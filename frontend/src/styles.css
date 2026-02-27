@@ -1,0 +1,10 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; }
+.container { max-width: 1100px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+h1, h2, h3 { margin-top: 0; }
+input, select, button { padding: 8px; margin: 4px 0; }
+button { cursor: pointer; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 8px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.error { color: #d12f2f; font-size: 12px; }
+.row { display: flex; gap: 10px; align-items: center; }

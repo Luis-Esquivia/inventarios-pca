@@ -1,0 +1,41 @@
+<div class="container">
+  <h2>Gestión de productos</h2>
+
+  <div class="row">
+    <input [(ngModel)]="filtro" placeholder="Buscar por nombre" />
+    <button (click)="buscar()">Buscar</button>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <app-product-form [categorias]="categorias" [productoEditar]="seleccionado" (guardar)="guardar($event)"></app-product-form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Categoría</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of productos">
+      <td>{{ p.codigo }}</td>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.precio | currency:'USD' }}</td>
+      <td>{{ p.stockActual }}</td>
+      <td>{{ p.categoria?.nombre }}</td>
+      <td>
+        <button (click)="editar(p)">Editar</button>
+        <button (click)="eliminar(p.id)">Eliminar</button>
+      </td>
+    </tr>
+    <tr *ngIf="productos.length === 0">
+      <td colspan="6">No hay productos para mostrar.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
