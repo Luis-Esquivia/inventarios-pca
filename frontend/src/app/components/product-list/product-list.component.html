@@ -8,6 +8,7 @@
 
   <p class="error" *ngIf="error">{{ error }}</p>
 
+
   <app-product-form [categorias]="categorias" [productoEditar]="seleccionado" (guardar)="guardar($event)"></app-product-form>
 
   <table>
@@ -33,9 +34,11 @@
         <button (click)="eliminar(p.id)">Eliminar</button>
       </td>
     </tr>
+
     <tr *ngIf="productos.length === 0">
       <td colspan="6">No hay productos para mostrar.</td>
     </tr>
+
     </tbody>
   </table>
 </div>

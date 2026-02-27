@@ -13,7 +13,9 @@ export class ProductListComponent implements OnInit {
   productos: Producto[] = [];
   filtro = '';
   seleccionado: Producto | null = null;
+
   error = '';
+
 
   constructor(
     private readonly productoService: ProductoService,
@@ -26,6 +28,7 @@ export class ProductListComponent implements OnInit {
   }
 
   cargarCategorias(): void {
+
     this.categoriaService.listar().subscribe({
       next: (data) => {
         this.categorias = data;
@@ -47,12 +50,14 @@ export class ProductListComponent implements OnInit {
         this.error = 'No se pudieron cargar los productos. Verifique API y CORS.';
       }
     });
+
   }
 
   guardar(producto: Producto): void {
     const request = producto.id
       ? this.productoService.actualizar(producto)
       : this.productoService.crear(producto);
+
 
     request.subscribe({
       next: () => {
@@ -62,6 +67,7 @@ export class ProductListComponent implements OnInit {
       error: () => {
         this.error = 'No se pudo guardar el producto.';
       }
+
     });
   }
 
@@ -79,5 +85,6 @@ export class ProductListComponent implements OnInit {
         this.error = 'No se pudo eliminar el producto.';
       }
     });
+
   }
 }

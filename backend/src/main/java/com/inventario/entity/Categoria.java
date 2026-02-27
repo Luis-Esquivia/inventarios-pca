@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "categorias")
@@ -22,7 +22,9 @@ public class Categoria {
     private String descripcion;
 
     @OneToMany(mappedBy = "categoria")
+
     @JsonIgnore
+
     private List<Producto> productos = new ArrayList<>();
 
     public Long getId() {

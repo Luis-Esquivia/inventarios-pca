@@ -1,7 +1,9 @@
+
 <div class="container">
   <h1>Sistema de Gestión de Inventario</h1>
   <p class="error" *ngIf="error">{{ error }}</p>
 </div>
+
 
 <app-product-list></app-product-list>
 <app-movimiento-form [productos]="productos" (registrar)="registrarMovimiento($event)"></app-movimiento-form>

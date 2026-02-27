@@ -10,7 +10,9 @@ import { ProductoService } from './services/producto.service';
 export class AppComponent implements OnInit {
   productos: Producto[] = [];
   productoHistorialId?: number;
+
   error = '';
+
 
   constructor(
     private readonly productoService: ProductoService,
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   recargarProductos(): void {
+
     this.productoService.listar().subscribe({
       next: (data) => {
         this.productos = data;
@@ -31,11 +34,13 @@ export class AppComponent implements OnInit {
       },
       error: () => {
         this.error = 'No se pudieron cargar los productos para movimientos.';
+
       }
     });
   }
 
   registrarMovimiento(evento: { productoId: number; tipoMovimiento: 'ENTRADA' | 'SALIDA'; cantidad: number }): void {
+
     this.movimientoService.registrar(evento).subscribe({
       next: () => {
         this.error = '';
@@ -45,6 +50,7 @@ export class AppComponent implements OnInit {
       error: (err) => {
         this.error = err?.error?.message ?? 'No se pudo registrar el movimiento.';
       }
+
     });
   }
 }

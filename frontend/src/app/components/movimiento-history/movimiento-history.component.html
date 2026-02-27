@@ -1,6 +1,8 @@
 <div class="container" *ngIf="productoId">
   <h3>Historial de movimientos (Producto ID: {{ productoId }})</h3>
+
   <p class="error" *ngIf="error">{{ error }}</p>
+
   <table>
     <thead>
     <tr>
@@ -15,9 +17,7 @@
       <td>{{ m.cantidad }}</td>
       <td>{{ m.fecha | date:'short' }}</td>
     </tr>
-    <tr *ngIf="movimientos.length === 0">
-      <td colspan="3">Sin movimientos para el producto seleccionado.</td>
-    </tr>
+
     </tbody>
   </table>
 </div>

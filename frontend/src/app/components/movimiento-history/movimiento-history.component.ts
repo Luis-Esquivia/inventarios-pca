@@ -9,7 +9,9 @@ import { MovimientoService } from '../../services/movimiento.service';
 export class MovimientoHistoryComponent implements OnChanges {
   @Input() productoId?: number;
   movimientos: MovimientoInventario[] = [];
+
   error = '';
+
 
   constructor(private readonly movimientoService: MovimientoService) {}
 
@@ -27,5 +29,6 @@ export class MovimientoHistoryComponent implements OnChanges {
         this.error = 'No se pudo cargar el historial de movimientos.';
       }
     });
+
   }
 }
