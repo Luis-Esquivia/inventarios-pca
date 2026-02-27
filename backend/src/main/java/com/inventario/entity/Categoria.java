@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "categorias")
 public class Categoria {
@@ -21,6 +22,9 @@ public class Categoria {
     private String descripcion;
 
     @OneToMany(mappedBy = "categoria")
+
+    @JsonIgnore
+
     private List<Producto> productos = new ArrayList<>();
 
     public Long getId() {

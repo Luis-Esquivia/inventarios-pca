@@ -14,6 +14,9 @@ export class ProductListComponent implements OnInit {
   filtro = '';
   seleccionado: Producto | null = null;
 
+  error = '';
+
+
   constructor(
     private readonly productoService: ProductoService,
     private readonly categoriaService: CategoriaService
@@ -25,11 +28,29 @@ export class ProductListComponent implements OnInit {
   }
 
   cargarCategorias(): void {
-    this.categoriaService.listar().subscribe((data) => (this.categorias = data));
+
+    this.categoriaService.listar().subscribe({
+      next: (data) => {
+        this.categorias = data;
+        this.error = '';
+      },
+      error: () => {
+        this.error = 'No se pudieron cargar las categorías. Verifique que el backend esté ejecutándose en http://localhost:8080.';
+      }
+    });
   }
 
   buscar(): void {
-    this.productoService.listar(this.filtro).subscribe((data) => (this.productos = data));
+    this.productoService.listar(this.filtro).subscribe({
+      next: (data) => {
+        this.productos = data;
+        this.error = '';
+      },
+      error: () => {
+        this.error = 'No se pudieron cargar los productos. Verifique API y CORS.';
+      }
+    });
+
   }
 
   guardar(producto: Producto): void {
@@ -37,9 +58,16 @@ export class ProductListComponent implements OnInit {
       ? this.productoService.actualizar(producto)
       : this.productoService.crear(producto);
 
-    request.subscribe(() => {
-      this.seleccionado = null;
-      this.buscar();
+
+    request.subscribe({
+      next: () => {
+        this.seleccionado = null;
+        this.buscar();
+      },
+      error: () => {
+        this.error = 'No se pudo guardar el producto.';
+      }
+
     });
   }
 
@@ -51,6 +79,12 @@ export class ProductListComponent implements OnInit {
     if (!id) {
       return;
     }
-    this.productoService.eliminar(id).subscribe(() => this.buscar());
+    this.productoService.eliminar(id).subscribe({
+      next: () => this.buscar(),
+      error: () => {
+        this.error = 'No se pudo eliminar el producto.';
+      }
+    });
+
   }
 }

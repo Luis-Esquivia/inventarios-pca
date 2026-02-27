@@ -10,6 +10,9 @@ export class MovimientoHistoryComponent implements OnChanges {
   @Input() productoId?: number;
   movimientos: MovimientoInventario[] = [];
 
+  error = '';
+
+
   constructor(private readonly movimientoService: MovimientoService) {}
 
   ngOnChanges(): void {
@@ -17,6 +20,15 @@ export class MovimientoHistoryComponent implements OnChanges {
       this.movimientos = [];
       return;
     }
-    this.movimientoService.historial(this.productoId).subscribe((data) => (this.movimientos = data));
+    this.movimientoService.historial(this.productoId).subscribe({
+      next: (data) => {
+        this.movimientos = data;
+        this.error = '';
+      },
+      error: () => {
+        this.error = 'No se pudo cargar el historial de movimientos.';
+      }
+    });
+
   }
 }
