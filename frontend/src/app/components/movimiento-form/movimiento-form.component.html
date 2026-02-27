@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Registrar movimiento</h2>
+  <form [formGroup]="form" (ngSubmit)="enviar()" class="row">
+    <select formControlName="productoId">
+      <option [ngValue]="null">Seleccione producto</option>
+      <option *ngFor="let p of productos" [ngValue]="p.id">{{ p.nombre }} (Stock: {{ p.stockActual }})</option>
+    </select>
+
+    <select formControlName="tipoMovimiento">
+      <option *ngFor="let tipo of tipos" [ngValue]="tipo">{{ tipo }}</option>
+    </select>
+
+    <input type="number" formControlName="cantidad" min="1" />
+    <button type="submit">Registrar</button>
+  </form>
+</div>
